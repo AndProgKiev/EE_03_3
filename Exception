@@ -1,0 +1,10 @@
+Exception in thread "main" java.lang.IllegalArgumentException: Can not set java.lang.String field Three.RemarkFields.smallString to java.lang.Class
+	at sun.reflect.UnsafeFieldAccessorImpl.throwSetIllegalArgumentException(UnsafeFieldAccessorImpl.java:167)
+	at sun.reflect.UnsafeFieldAccessorImpl.throwSetIllegalArgumentException(UnsafeFieldAccessorImpl.java:171)
+	at sun.reflect.UnsafeFieldAccessorImpl.ensureObj(UnsafeFieldAccessorImpl.java:58)
+	at sun.reflect.UnsafeObjectFieldAccessorImpl.set(UnsafeObjectFieldAccessorImpl.java:75)
+	at java.lang.reflect.Field.set(Field.java:764)
+	at Three.ReflectRun.main(ReflectRun.java:46)
+
+
+
