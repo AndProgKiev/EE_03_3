@@ -1,0 +1,49 @@
+
+import java.io.*;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ReflectRun {
+    public static void main(String[] args) throws  IllegalAccessException, IOException {
+
+        RemarkFields testClass=new RemarkFields("Hello","Java",100);
+        Class<?> cl= testClass.getClass();
+        String listValue=""; //для зберігання значень полів
+
+        Field [] fields=cl.getDeclaredFields();
+        for (Field field:fields){
+            if(field.isAnnotationPresent(MarkToSave.class)){
+                field.setAccessible(true);
+                listValue+=field.get(testClass)+" ";
+            }
+        }
+        try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("D:\\test.txt"))) {
+            writer.write(listValue);
+        }
+
+        List<String> valueList=new ArrayList<>();
+        try(InputStreamReader reader=new InputStreamReader(new FileInputStream("D:\\test.txt"))){
+            BufferedReader br=new BufferedReader(reader);
+            String [] lines=br.readLine().split(" ");
+
+            for (String s:lines){
+                valueList.add(s);
+            }
+        }
+
+        RemarkFields newClass=new RemarkFields("Bla","Bla",5);
+
+        Class<?> newCl=newClass.getClass();
+        Field []fields1=newCl.getDeclaredFields();
+        int count=0;
+        for (Field field:fields1) {
+            if (field.isAnnotationPresent(MarkToSave.class)) {
+                field.setAccessible(true);
+               field.set(newCl,valueList.get(count));
+                count++;
+            }
+        }
+        System.out.println(newClass);
+    }
+}
